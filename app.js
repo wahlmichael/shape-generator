@@ -59,14 +59,21 @@ class Generator{
 class UI{
     // Takes in an array of shapes and puts into the shape container
     static displayShapes(shapeArray){
+        // Targets shape container
         const shapeContainer = document.getElementById('shape-container');
         let item = '';
+        // Loops through all objects in array
         shapeArray.forEach(shapeObj => {
+            // Creates div
             item = document.createElement('div'); 
+            // Add shape class and name of shape class
             item.classList.add('shape', shapeObj.constructor.name.toLowerCase())
+            // Set height and width of shape based on object
             item.style.width = shapeObj.constructor.name === 'Square' ? `${shapeObj.length}px` : `${shapeObj.diameter}px`;
             item.style.height = shapeObj.constructor.name === 'Square' ? `${shapeObj.length}px` : `${shapeObj.diameter}px`;
+            // Gives div data attribute to store the return of toString()
             item.setAttribute('data-toString', shapeObj.toString())
+            // Appends div to the shape container
             shapeContainer.appendChild(item);
         })
     }

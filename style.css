@@ -88,3 +88,21 @@ body {
     cursor: pointer;
     
 }
+
+/* media queries for smaller screen */
+
+@media (max-width: 1600px){
+    body{
+        overflow: auto;
+    }
+
+    #shape-container{
+        width: 400px;
+    }
+}
+
+@media (max-height: 1000px){
+    body{
+        overflow: auto;
+    }
+}
