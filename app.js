@@ -68,14 +68,35 @@ class UI{
 
     static generateAndDisplayShapes(){
         UI.clearShapes();
+
         const sortedShapes = Generator.sortShapes(Generator.generateShapes());
         UI.displayShapes(sortedShapes);
-        setTimeout(UI.generateAndDisplayShapes, 500);
+        
 
     }
 
     static clearShapes(){
         document.getElementById('shape-container').innerHTML = '';
+    }
+
+    static refreshShapes(){
+        setTimeout(function(){
+            UI.generateAndDisplayShapes();
+            UI.refreshShapes();
+        }, 500);
+    }
+
+    static rotateSquares(){
+        const squares = document.getElementsByClassName('square');
+        let rotationAmount = 0;
+        const rotateInterval = setInterval(getRotation, 500)
+        function getRotation(){
+            rotationAmount += 10;
+            if(rotationAmount === 360) rotationAmount = 0;
+            for(let i = 0; i < squares.length; i++){
+                squares[i].style.transform = `rotate(${rotationAmount}deg)`;
+            }
+        }
     }
 }
 
@@ -83,6 +104,21 @@ class UI{
 window.addEventListener("load", function(){
     UI.generateAndDisplayShapes();
 })
+
+document.getElementById('rotate').addEventListener('click', function(){
+    UI.rotateSquares();
+})
+
+document.getElementById('refresh').addEventListener('click', function(){
+    UI.refreshShapes();
+})
+
+// document.getElementsByClassName('shape').addEventListener('mouseover', function(e){
+//     console.log('mousedover')
+// })
+
+
+
 
 
 
