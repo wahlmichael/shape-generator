@@ -10,7 +10,7 @@ class Circle{
     }
 
     toString(){
-        return `Circle: Radius = ${this.radius}, Area = ${this.getArea()}`
+        return `Circle: Radius = ${this.radius}, Area = ${this.getArea().toFixed(2)}`
     }
 }
 
@@ -25,16 +25,18 @@ class Square{
     }
 
     toString(){
-        return `Square: Length = ${this.length}, Area = ${this.getArea()}`
+        return `Square: Length = ${this.length}, Area = ${this.getArea().toFixed(2)}`
     }
 }
 
 // Shape Generator Class
 class Generator{
+    // Sorts shapes in order of decending area
     static sortShapes(shapeArray){
         return shapeArray.sort((a, b) => b.getArea() - a.getArea());
     }
 
+    // Creates an array of 50 random circles and squares
     static generateShapes(){
         const shapeArray = [];
         for(let i = 0; i < 100; i++){
@@ -47,6 +49,7 @@ class Generator{
         return shapeArray;
     }
 
+    // Returns random number between 2 arguments
     static randomizeBetween(min, max){
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
@@ -54,6 +57,7 @@ class Generator{
 
 // UI Class
 class UI{
+    // Takes in an array of shapes and puts into the shape container
     static displayShapes(shapeArray){
         const shapeContainer = document.getElementById('shape-container');
         let item = '';
@@ -62,23 +66,47 @@ class UI{
             item.classList.add('shape', shapeObj.constructor.name.toLowerCase())
             item.style.width = shapeObj.constructor.name === 'Square' ? `${shapeObj.length}px` : `${shapeObj.diameter}px`;
             item.style.height = shapeObj.constructor.name === 'Square' ? `${shapeObj.length}px` : `${shapeObj.diameter}px`;
+            item.setAttribute('data-toString', shapeObj.toString())
             shapeContainer.appendChild(item);
         })
     }
 
+    // Clears the shapes the runs functions to generate, sort and display shapes
     static generateAndDisplayShapes(){
         UI.clearShapes();
 
         const sortedShapes = Generator.sortShapes(Generator.generateShapes());
         UI.displayShapes(sortedShapes);
-        
 
+        // Adds mouseover event listener to all shapes
+        document.querySelectorAll('.shape').forEach(item => {
+            item.addEventListener('mouseover', e => {
+              UI.displayShapeInfo(e.target.dataset.tostring)
+            })
+            item.addEventListener('mouseout', e => {
+              UI.clearShapeInfo()
+              })
+          })
     }
 
+    // Displays string to sidebar
+    static displayShapeInfo(shapeInfo){
+        const outputText = document.getElementById('output-text');
+        outputText.innerText = shapeInfo;
+    }
+
+    // Clears shape info area on mouseout
+    static clearShapeInfo(){
+        const outputText = document.getElementById('output-text');
+        outputText.innerText = '';
+    }
+
+    // Resets container to be empty
     static clearShapes(){
         document.getElementById('shape-container').innerHTML = '';
     }
 
+    // Regenerates the shapes twice per seconds
     static refreshShapes(){
         setTimeout(function(){
             UI.generateAndDisplayShapes();
@@ -86,10 +114,11 @@ class UI{
         }, 500);
     }
 
+    // Rotates shapes by 10 degrees twice per second
     static rotateSquares(){
         const squares = document.getElementsByClassName('square');
         let rotationAmount = 0;
-        const rotateInterval = setInterval(getRotation, 500)
+        setInterval(getRotation, 500)
         function getRotation(){
             rotationAmount += 10;
             if(rotationAmount === 360) rotationAmount = 0;
@@ -113,9 +142,12 @@ document.getElementById('refresh').addEventListener('click', function(){
     UI.refreshShapes();
 })
 
-// document.getElementsByClassName('shape').addEventListener('mouseover', function(e){
-//     console.log('mousedover')
-// })
+document.getElementById('refresh-page').addEventListener('click', function(){
+    location.reload();
+})
+
+
+
 
 
 

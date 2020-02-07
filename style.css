@@ -14,9 +14,10 @@ body {
     justify-content: space-evenly;
     overflow: hidden;
     font-family: 'Raleway', sans-serif;
-    color: #24305e;
+    color: #374785;
   }
 
+/* shape styles */
 #shape-container {
     width: 1270px;
     height: 100vh;
@@ -39,6 +40,10 @@ body {
     background: #f76c6c;
 }
 
+.shape:hover {
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
+
 /* Sidebar Styles */
 #sidebar{
     width: 300px;
@@ -57,4 +62,29 @@ body {
     height: 30%;
     background: #f4f4f4;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#sidebar #output-text{
+    text-align: center;
+}
+
+/* button styles */
+.btn {
+    width: 80%;
+    padding: 10px 15px;
+    background: #f76c6c;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+    outline: none;
+
+}
+
+.btn:hover {
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    
 }
