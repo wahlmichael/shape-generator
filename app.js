@@ -2,6 +2,7 @@
 class Circle{
     constructor(radius){
         this.radius = radius;
+        this.diameter = this.radius * 2;
     }
     
     getArea(){
@@ -59,7 +60,15 @@ class UI{
         shapeArray.forEach(shapeObj => {
             item = document.createElement('div'); 
             item.classList.add('shape', shapeObj.constructor.name.toLowerCase())
+            item.style.width = shapeObj.constructor.name === 'Square' ? `${shapeObj.length}px` : `${shapeObj.diameter}px`;
+            item.style.height = shapeObj.constructor.name === 'Square' ? `${shapeObj.length}px` : `${shapeObj.diameter}px`;
             shapeContainer.appendChild(item);
         })
     }
 }
+
+// Event Listeners 
+window.addEventListener("load", function(){
+    const sortedShapes = Generator.sortShapes(Generator.generateShapes());
+    UI.displayShapes(sortedShapes);
+})

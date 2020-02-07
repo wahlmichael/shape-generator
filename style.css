@@ -1,20 +1,37 @@
 *{
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 body {
-    background-size: 30px 30px;
+    background-size: 25px 25px;
     background-image:
-      linear-gradient(to right, grey 1px, transparent 1px),
-      linear-gradient(to bottom, grey 1px, transparent 1px);
+      linear-gradient(to right, #A2BCD1 1px, transparent 1px),
+      linear-gradient(to bottom, #A2BCD1 1px, transparent 1px);
       display: flex;
-      margin: 0;
+      align-items: center;
+      justify-content: center;
   }
 
-.shape-container {
-    max-width: 1170px;
-    min-width: 1170px;
+#shape-container {
+    width: 1270px;
     height: 100vh;
-    border: 1px solid red;
     display: grid;
+    grid-template-columns: repeat(10, 100px);
+    grid-gap: 30px;
+}
+
+.shape {
+    margin: auto;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+}
+
+.shape.circle {
+    background: #374785;
+    border-radius: 50%;
+}
+
+.shape.square {
+    background: #f76c6c;
 }
