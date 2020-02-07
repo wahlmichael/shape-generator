@@ -65,10 +65,24 @@ class UI{
             shapeContainer.appendChild(item);
         })
     }
+
+    static generateAndDisplayShapes(){
+        UI.clearShapes();
+        const sortedShapes = Generator.sortShapes(Generator.generateShapes());
+        UI.displayShapes(sortedShapes);
+        setTimeout(UI.generateAndDisplayShapes, 500);
+
+    }
+
+    static clearShapes(){
+        document.getElementById('shape-container').innerHTML = '';
+    }
 }
 
 // Event Listeners 
 window.addEventListener("load", function(){
-    const sortedShapes = Generator.sortShapes(Generator.generateShapes());
-    UI.displayShapes(sortedShapes);
+    UI.generateAndDisplayShapes();
 })
+
+
+
